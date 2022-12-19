@@ -43,11 +43,12 @@ def handle_docs(message):
     with open(file_info.file_path, 'wb') as new_file:
         new_file.write(downloaded_file)
     os.rename(file_info.file_path, f"videos/{message.video.file_name}")
+    bot.send_message(chat_id = message.chat.id , text = "Download completed!!!")
     title = message.video.file_name[:-4]
     for i in  "\/?:*><|.,":
         title = title.replace(i, "")
+    bot.send_message(chat_id = message.chat.id , text = "Converting...")
     file = extract_audio(f"videos/{title}.mp4")
-    bot.send_message(chat_id = message.chat.id , text = "Download completed!!!")
     bot.send_audio(chat_id = message.chat.id, audio = open(file, 'rb'))
     os.remove(file)
 
