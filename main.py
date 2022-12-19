@@ -5,7 +5,7 @@ import datetime
 import moviepy.editor
 from config import settings
 
-bot=telebot.TeleBot()
+bot=telebot.TeleBot(settings["token"])
 
 def extract_audio(file):
     (moviepy.editor.VideoFileClip(file)).audio.write_audiofile(file.split(".")[0] + ".mp3")
